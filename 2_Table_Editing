@@ -1,0 +1,73 @@
+1,'Where' sentences
+	1,Formate:
+		->select * from TableName 
+		->where Condition; ie:
+
+			->select Name from db1 where address = 'USSR'
+
+			#This sentences returns field 'Name' of 
+			#those whose address is 'USSR'
+
+2,Table editing (Continue)
+	1,Updating field name:
+		->updata TableName set Field=a,Field=b...
+		->where Condition; ie:
+
+			->update t1 set address='Russia' where name = 'Stalin'
+
+			#Change the field name of 'Condition' into new name 
+
+	2,Delete:
+		->delete from TableName 
+		->where condition; #Attention
+
+			### If condition is not given the table will be lost ### 
+
+3.Logical conditions
+	1,Logical statements:
+		and 					#All conditions must be meet
+		or  					#One or more conditions are meet
+		between V1 and V2		#Set value range
+		in/is	#Attension		#Set value/logic statement manually 
+
+			Logic statement NULL is matched by 'is',empty set '' is matched by =/!''
+		not in/is not			#Skip
+		like "_%"				#Vague search, _for unknown but present, A% for must have 'A'
+
+			
+
+	2,Example:
+		Between and
+			->select * from SanGuo
+			->where
+			->(GongJi between 100 and 200) and (country = "SHU")
+
+		in & is
+			->select * from SanGuo
+			->where
+			->id in (1,3,5) and is null
+			
+		like
+			"_%_"	 Length > 2
+			"%"      Is not null
+			"___"    Length = 3
+			"Zhang%" Contains "Zhang"
+
+4.Default field settings
+	1.How to do it?
+		When constructing a new field title, structure it like:
+		FieldName DataType default Value
+
+	2.ie:
+		-> name char(20),
+		-> sex enum ("F","M","Secret") default "Secret",
+		# "sex" field is set as "Secret" by default
+		# If not specified by user, the systerm treat default as 'NULL'
+
+	3.Use of 'not null':
+		Add to the field title to prohibit "NULL" as default
+		If no value given it will then be error if 
+		There's no default setting by the user
+
+		ie:
+			->name char(20) not null default "Nameless"

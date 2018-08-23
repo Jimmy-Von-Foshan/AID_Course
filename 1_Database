@@ -1,0 +1,80 @@
+1.MYSQL DATABASE Basic commands
+	->show databases;               
+	->create/drop datebase db1;  	#Literaly means it 
+	->show create database db1;     #Info dashboard for db1
+	->select database();            #Which db have i used
+	->use name;                     #Put me in db1
+	->show tables;                  #Show tables in db1
+
+2.TABLE
+	1,Table structure:
+		+-------+--------+-------+
+		|Field1 | Field2 |Field3 |
+		+-------+--------+-------+
+		|Record1| Record1|Record1|
+		+-------+--------+-------+
+		|Record2| Record2|Record2|
+		+-------+--------+-------+
+	
+	2,Creating tables:	
+		->create table t1(
+		->FieldName1 DataType1,
+		->FieldName2 DataType2,
+		->);
+
+	3,Enter Database and start inserting value into t1
+		->insert into t1 
+		->values (Record1....),  # () contains a record correspond to sucessory field
+				 (Record2....),	 #'Char' records should be held in ''
+
+	4,Basic commands for tables
+		->show create table t1;    #Property of the table
+		->desc t1;				   #Datatype dashboard
+		->drop table t1;           #Delete
+
+	5,FYI
+		All database are stored as file in /var/lib/mysql
+		Datas are recorded in hard drive form, ie not for RAM
+
+3.Datatype for field inputs
+	1.INTEGERS
+		'int' 				#Big integer 0~2**32, 4b each
+		'tinyint'			#Small integer 0~255 for unsigned
+							#input un/signed after datatype to specify integer sign
+		'smallint'			#0~65535, 2b each
+		'bigint'			#0~2**64,8b each
+
+	2.FLOAT
+		'float(m,n)'		#m, total significant figures,max=7
+							#n, total figures after decimal
+		'double(m,n)' 		#m=15 work as float
+		'decimal(m,n)' 		#m=28
+
+	3.STRINGS
+		'char(0~255)'   #String w/in 255 charaters
+		'varchar(1~65535)'
+
+	4.SELECTION
+		'enum(A,B,C)'		#single selection from ()
+		'set(A,B,C)'		#Muiltiple selection from ()
+
+	5.TIME
+		'year' 				#yyyy
+		'date' 				#ddmmyyyy(UK format)
+		'time' 				#hhmmss
+		'datetime' 			#yyyymmddhhmmss  #Return Null
+		'timestamp' 		#yyyymmddhhmmss #Return system time
+
+4,VIEW INSERTED DATA
+	1,Basics
+		->select * from t1    			#View everything
+		->select field1 from t1			#View a field
+		->'select * from t1\G' 			#View everything in a list
+		
+	2,'Where' sentences
+		->select * from t1 
+		->where Condition; ie:
+
+			->select name from t1 where address = 'USSR'
+			#This sentences returns field 'Name' of 
+#those whose address is 'USSR'

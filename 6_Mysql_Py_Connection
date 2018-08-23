@@ -1,0 +1,42 @@
+1.Start the work
+	1. Start connection 
+		1.-> db = pymysql.connect ('host','UID','Pw','dbName')
+			# Quick route to connect method 'pymysql.connect'
+
+		2.-> cur=db.cursor()
+			# Quick route to cursor method 'pymysql.connect.cursor'
+
+	2. Usb methods of 'connect'
+		1. -> db.cursor()   #Create a cursor object 
+		2. -> db.commit()   #Commit changes
+		3. -> db.rollback() #Cancle changes
+		4. -> db.close()    #Disconnect from database
+
+	3. Usb Usb methods of 'cursor'
+		1. -> cur.execute()		#Execute in Mysql
+		2. -> cur.fetchmany(N)	#Get the first N records from mysql
+		3. -> cur.fetchall()	#Get all records from mysql
+		4. -> cur.close()		#Close the cursor
+
+2.Results displays
+	1.Fetch
+		Results from MySql are stored in 'cursor',
+		Use fetch method to get data from it.
+
+		-> data = cursor.fetchall()/fetchmany(N)
+		# Take all records or N records
+		# Results are store in 'data' in forms of brackets ('1','tom','98')
+
+3.Try 
+	1.Code
+		-> try:						#Attempt to run the code ONE BY ONE
+		-> 		cur....				#Work space
+		-> 		cur....
+		->		db.commit()
+		->		print('OK')			#Print 'OK' if everything works
+		-> excepte Exception:
+		->		print ('Error found, undo all the work')			
+		-> 		db.rollback()
+
+		# If any one of the codes go wrong the error sentence will be printed
+		# All the works will be undo with methond 'db.rollback'

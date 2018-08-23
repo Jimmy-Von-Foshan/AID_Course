@@ -1,0 +1,80 @@
+1.Search tools
+	1.Order by 				#Show search results in certain order
+		-> order by desc 	#descending order
+		-> order by asc 	#ascending order
+
+		#ie:
+			-> select * from sanguo
+			-> where country in ("shu") and name like "__"
+			-> order by gongji desc;
+	
+	2.limit				#Limit the number of search result been popped
+		-> limit 1,3 	#Show record 2,3,4
+						#The first record in record "0"
+		-> limit 3 		#Show first 3 records hence 1,2,3 
+
+	3.Functions 
+		1.Calculation		#Maximum,Minimun and Sumation, excel style
+			-> max(field1)  
+			-> min(field1) 
+			-> sum(field1)
+			#ie: 
+				->select sum(gongji) from sanguo
+				->where country = "Shu"
+				#Returns sum of gongji matching "Shu"
+
+
+		2.Count 						#Finger counting
+			-> count(field1) as C_f1 	#Count field1,return Num_f1
+										#"Null" excluded,"" included
+			#ie:
+				-> select count(name) as C_name
+				-> from sanguo
+				# Returns C_name, number of names exclude Null
+
+	4.Group statement
+		1.group by
+			Group records specified by user input first
+			and then find the desired result with functions
+
+			ie:
+				->select country,avg(gongji) from sanguo 	#Get data
+				->group by country							#How to show results
+				->order by avg(gongji) desc 				#Desired result
+				->limit 2;									#Desired result
+
+				#In this case records are grouped by "country" to find 
+				the desired result "top 2 in avg(gongji)"
+
+		2.having
+			1.Used like "where" on created function by user
+			2.Often used with group by function to filter the results returned from group by
+
+			ie:
+			-> select country,avg(gongji) from sanguo
+			-> group by country
+			-> having avg(gongji)>105 
+
+				#"where" can't be used on created function like "avg(gongji)"
+				It mush be used on existed parameter in the table
+				In this case "having" is use instead.
+
+	5.distnct
+		1.Do not count the repeating contents
+		2.Cant be used on user created function
+
+		3.ie:
+		->select distinct country from sanguo   #Returns "Wei","Shu","Wu"
+
+		4.ie:
+		->select count(distinct name) from sanguo 
+		->where country = "Shu"					
+		#Returns the number of distinct name in "Shu"
+
+	6.Mathmatical operation in searching
+		1.Signs: + - * / %
+
+		2.ie:
+		->select id,name,gongji*10 as NewGongji from sanguo
+		#Show the gongji*10 of all heros
+		

@@ -1,0 +1,69 @@
+1.Import data
+	1.From files to table, ie: Ubuntu User info
+		1.file
+			/etc/passwd
+
+		2.Data formate
+			jimmypdl:x:1000:1000:tarena,,,:
+			/home/jimmypdl:/bin/bash
+
+			UserID:Password:UserID:GroupID:Description:
+			HomeLocation:LoginPermission
+
+			# Field seperated by ";"
+			# Lines seperated by "\n"
+
+	2.Import steps
+		1.Create a new table in MySql
+
+		2.Check the home location of MySql database
+			->show variables like "secure_file_priv"
+
+		3.Copy external data into the database
+			->sudo cp /etc/passwd   	#User info in Ubuntu
+			->/var/lib/mysql-fille		#From the last step
+
+		4.Load from database into new table in MySql
+			->load data infile "FileInDatabase"
+			->into table t1
+			->fields terminated by "SeperationMethod"
+			->lines terminated by "SeperationMethod
+
+2.Export data
+	1.Code
+		->select * from db1.t1     	#From a different Database
+		->into outfile "FolderName"
+		->fields terminated by "SeperationMethod"
+		->lines terminated by "SeperationMethod"
+
+3.Copy table
+	1.Code
+		->create table t2 select * from t1;
+		->limite 10   			#Only copy a part of t1
+		->where false 			#Only copy formate, ie stuffs in desc
+		
+		#The copy doesn't includes key settings of original table
+
+4.Inserted Search
+	1.Example Code
+		-> select Username,Uid from Userinfo 
+		-> where Uid < 
+		-> (select avg(Uid) from userinfo);
+
+		# Select uid less then average 
+
+5.Search across tables
+	1,Example Code
+		-> select * from t1,t1;
+		-> where ...
+
+6.Linked search
+	1.Inner link
+		1.Intro
+			Delete the contents that's not link to the 
+			other table
+		2.Code
+			->select * from t1
+			->inner join t2 on 
+			->Conditions...;
+			

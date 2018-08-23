@@ -1,0 +1,19 @@
+Github tutorial
+
+	1.Link:
+	https://www.howtoforge.com/tutorial/install-git-and-github-on-ubuntu/
+	https://blog.csdn.net/jabony/article/details/72897055
+
+	2.Adding new file:
+		-> git add . (All)
+		-> git commit -m "some_message"
+		-> git push origin master
+
+	3.Clone from github:
+		-> git fetch --all && git reset --hard origin/master && git pull
+
+	4.Update to Github
+		-> git add *
+		-> git commit -m "some_message"
+		-> git pull 
+		-> git push origin master

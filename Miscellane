@@ -1,0 +1,16 @@
+Miscellane
+
+1.Standard python code for Mysql connection
+
+	import pymysql
+	db=pymysql.connect('localhost','root','123456','python')
+	cur=db.cursor()
+
+	#----------------------------Work space----------------------------
+
+
+
+	#----------------------------Work space----------------------------
+	db.commit()
+	cur.close()
+	db.close() 

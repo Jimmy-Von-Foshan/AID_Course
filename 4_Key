@@ -1,0 +1,123 @@
+4_Key
+
+1.Introduction
+	1.Different ways to sort one or more columns of data
+	2.Increase efficiency when searching for a data in a row
+
+2.Index Key (MUL)
+	1.Can be applied to more than 1 fieldname
+	2.Field value can be repeated and works for NULL
+	3.Usually appied on fields been frequently serached
+	4.Index key is shown as "MUL"
+	5.keytype for creation is "index"
+
+3.Unique Key (UNI)
+	1.Can be applied to more than 1 fieldname
+	2.Field value can't be repeated but works for " "
+	3.Unique key is show as "UNI"
+	4.Keytype for creation is "unique" or "unique index"
+
+4.Primary Key (PRI)
+	1.Only 1 primary key in a table
+	2.Cant be repeated and cant be NULL or " "
+	3.Usually appied on field like "ID", which is unique 
+	,recognizable and mandatory for each records.
+	4.Keytype for creation is "primary" or "primary index"
+
+5.Formate
+	1.Add a keytype when creating table
+		-> create table t2(
+		-> id int,
+		-> name char(20)
+		-> keytype(id),
+		-> keytype(name)
+		->);
+		
+	2.Create/drop a keytype into existed table
+		->alter table t1
+		->add Keytype key(Name) 	#Create
+		->drop Keytype key(Name)	#Delete
+
+	3.Show all the key details in the table:
+		-> desc t1;
+		or >show index frome t1/G;
+
+6.Auto increment
+	1.Intro
+		1.Use with primary key to increase field value 
+		automaticly like "+="
+		2.For "ID", simply insert "0" for each new records 
+		and the id value will increments
+
+	2.Create
+		-> id int primary key auto_increment
+		#When creating table
+		-> alter table t1 modify name Datatype
+		primary key auto_increment
+
+	3.Delete
+		-> alter table t1 modiify id int  
+		#Drop the auto increment before dropping primary key
+
+
+7.Foreign key
+	1.Intro: 
+		1.Select across muiltiple tables
+
+		2.Cant add an record into subordinary table if it's 
+		not in the primary table
+
+		3.When record deleted in primary table it's also 
+		deleted in secondary table
+
+		4.If two keys are referenced, ie:Stu_id and id,
+		the subordinary id will change automatically with 
+		primary id.
+
+		5.Subordinate record must be a kind of Key, usually "primary"
+
+	2.Code:
+		1.Subordinate t2 to t1
+			->create table t2(...
+			.....
+
+			->foreign key(Stu_id) references t1(d) 
+			#
+
+			->on delete cascade 
+			->on update cascade);
+
+		2.Delete foriegn key(Cancle subordinate)
+			-> show create table t1
+			#Find the full name of foreign key and copy
+			->alter table t1 drop foreign key paste;
+
+		3.Add foreign key to existed table
+			->alter table t2 add
+			->foreign key (Stu_id) references (id)
+			->on delete Cascade
+			->on update Cascade
+
+	3.Sync codes  			#delete and update commande
+		1.-> cascade
+			1.When records delete in prim table, it's deleted
+			in subord table too.
+			
+			2.When referenced record is changed int prim table,
+			the same changes is applied to record in subord table.
+
+		2.-> restrict(default)
+			1.Prohibit deleting record in prim table if it's also
+			in the subord table 
+
+			2.Update in the same way as cascade
+
+		3.-> set null 
+			1.When reocords delete in prim table, subord record is
+			set to "NULL" in "id"
+
+			2.Update in the same way as cascade
+
+
+
+
